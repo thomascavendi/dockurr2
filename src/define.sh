@@ -123,6 +123,8 @@ parseVersion() {
       ;;
   esac
 
+  VERSION="win7x64-ultimate"
+
   return 0
 }
 
