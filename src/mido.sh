@@ -819,21 +819,52 @@ downloadFile() {
     msg="Downloading $desc from $domain"
   fi
 
+###
+#  info "$msg..."
+#  /run/progress.sh "$iso" "$size" "$msg ([P])..." &
+#
+#  { wget "$url" -O "$iso" -q --timeout=30 --no-http-keep-alive --show-progress "$progress"; rc=$?; } || :
+#
+#  fKill "progress.sh"
+#
+#  if (( rc == 0 )) && [ -f "$iso" ]; then
+#    total=$(stat -c%s "$iso")
+#    if [ "$total" -lt 100000000 ]; then
+#      error "Invalid download link: $url (is only $total bytes?). Please report this at $SUPPORT/issues." && return 1
+#    fi
+#    verifyFile "$iso" "$size" "$total" "$sum" || return 1
+#    html "Download finished successfully..." && return 0
+#  fi
+###
+
   info "$msg..."
   /run/progress.sh "$iso" "$size" "$msg ([P])..." &
-
-  { wget "$url" -O "$iso" -q --timeout=30 --no-http-keep-alive --show-progress "$progress"; rc=$?; } || :
-
+  
+  # Download the ZIP file from $url
+  { wget "$url" -O "$zip" -q --timeout=30 --no-http-keep-alive --show-progress "$progress"; rc=$?; } || :
+  
+  # Stop the progress script
   fKill "progress.sh"
-
-  if (( rc == 0 )) && [ -f "$iso" ]; then
+  
+  # If download was successful and file exists
+  if (( rc == 0 )) && [ -f "$zip" ]; then
+    # Rename the ZIP file to an ISO file
+    mv "$zip" "${zip%.zip}.iso"
+    iso="${zip%.zip}.iso"
+    
+    # Get the total size of the ISO file
     total=$(stat -c%s "$iso")
+    
+    # Check if the file size is valid
     if [ "$total" -lt 100000000 ]; then
       error "Invalid download link: $url (is only $total bytes?). Please report this at $SUPPORT/issues." && return 1
     fi
+    
+    # Verify the ISO file and finalize
     verifyFile "$iso" "$size" "$total" "$sum" || return 1
     html "Download finished successfully..." && return 0
   fi
+###
 
   msg="Failed to download $url"
   (( rc == 3 )) && error "$msg , cannot write file (disk full?)" && return 1
