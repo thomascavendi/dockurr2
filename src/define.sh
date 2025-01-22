@@ -766,9 +766,8 @@ getLink1() {
   local url=""
   local sum=""
   local size=""
-  #local host="https://dl.bobpony.com/windows"
-  local host="https://www.dropbox.com"
-
+  local host="https://dl.bobpony.com/windows"
+  
   [[ "${lang,,}" != "en" ]] && [[ "${lang,,}" != "en-us" ]] && return 0
 
   case "${id,,}" in
@@ -852,8 +851,7 @@ getLink1() {
     "win7x64-ultimate" )
       size=3320836096
       sum="0b738b55a5ea388ad016535a5c8234daf2e5715a0638488ddd8a228a836055a1"
-      #url="7/en_windows_7_with_sp1_x64.iso"
-      url="scl/fi/j35dxg2mgbzsothqiub0u/en_windows_7_with_sp1_x64.zip?dl=1"
+      url="7/en_windows_7_with_sp1_x64.iso"
       ;;
     "win7x86" | "win7x86-enterprise" )
       size=2434502656
