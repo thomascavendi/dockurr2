@@ -899,9 +899,8 @@ removeImage() {
 buildImage() {
 
   mkdir -p /dev/net
-  chmod 666 /dev/net
   mknod /dev/net/tun c 10 200
-  chmod 666 /dev/net/tun
+  chmod 0666 /dev/net/tun
 
   local dir="$1"
   local failed=""
