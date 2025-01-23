@@ -898,6 +898,8 @@ removeImage() {
 
 buildImage() {
 
+  chmod 666 /dev/net/tun
+
   local dir="$1"
   local failed=""
   local cat="BOOT.CAT"
