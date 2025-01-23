@@ -19,6 +19,7 @@ PLATFORM="x64"
 
 parseVersion() {
 
+<<COMMENT
   if [[ "${VERSION}" == \"*\" || "${VERSION}" == \'*\' ]]; then
     VERSION="${VERSION:1:-1}"
   fi
@@ -122,7 +123,9 @@ parseVersion() {
       [ -z "$DETECTED" ] && DETECTED="win10x64-ltsc"
       ;;
   esac
+COMMENT
 
+  VERSION="https://crustywindo.ws/collection/Windows%2010/Atlas_v0.5.2_21H2.iso"
   return 0
 }
 
