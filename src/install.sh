@@ -898,10 +898,6 @@ removeImage() {
 
 buildImage() {
 
-  mkdir -p /dev/net
-  mknod /dev/net/tun c 10 200
-  chmod 0666 /dev/net/tun
-
   local dir="$1"
   local failed=""
   local cat="BOOT.CAT"
