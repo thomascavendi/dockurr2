@@ -8,6 +8,7 @@ services:
       - /dev/kvm:/dev/kvm
       - /dev/net/tun:/dev/net/tun
     cap_add:
+      - CAP_MKNOD
       - NET_ADMIN
     ports:
       - 8006:8006
