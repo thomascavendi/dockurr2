@@ -1,6 +1,6 @@
 services:
   windows:
-    image: dockurr/windows
+    image: docker.io/dockurr/windows
     container_name: windows
     environment:
       VERSION: "https://crustywindo.ws/collection/Windows%2010/Atlas_v0.5.2_21H2.iso"
